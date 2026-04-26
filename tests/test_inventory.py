@@ -3,6 +3,7 @@ from config.users import STANDARD_USER, STANDARD_PASSWORD
 from pages.inventory_page import InventoryPage
 from pages.login_page import LoginPage
 
+
 def test_tc_inv_001_products_count(inventory_page):
     """Отображение всех 6 товаров"""
     assert inventory_page.get_inventory_items_count() == 6

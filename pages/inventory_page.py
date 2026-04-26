@@ -60,6 +60,19 @@ class InventoryPage:
     def click_remove_button(self):
         self.page.locator("#remove-sauce-labs-backpack").click()
 
+    def get_cart_badge_text(self):
+       return self.page.locator(".shopping_cart_badge").text_content()
+
+    def click_add_to_cart(self, product_name):
+        product_card = self.page.locator(".inventory_item").filter(has_text=product_name)
+        product_card.locator("button").click()
+
+
+    def click_remove_from_cart(self, product_name):
+        product_card = self.page.locator(".inventory_item").filter(has_text=product_name)
+        product_card.locator("button").click()
+
+
 
 
 

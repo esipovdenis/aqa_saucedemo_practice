@@ -13,3 +13,6 @@ class CartPage:
     def click_checkout_button(self):
         self.page.locator("#checkout").click()
 
+    def click_continue_shopping(self):
+        self.page.locator("#continue-shopping").click()
+

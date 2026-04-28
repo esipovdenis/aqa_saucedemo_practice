@@ -1,81 +1,78 @@
-class InventoryPage:
-    def __init__(self, page):
-        self.page = page
+from pages.base_page import BasePage
 
-    def get_title(self):
-        return self.page.locator("text=Products")
+
+class InventoryPage(BasePage):
+    def __init__(self, page):
+        super().__init__(page)
+        self.title = self.page.locator("text=Products")
+        self.cart_button = self.page.locator(".shopping_cart_link")
+        self.cart_title = self.page.locator("text=Your Cart")
+        self.inventory_items = self.page.locator(".inventory_item")
+        self.inventory_names = self.page.locator(".inventory_item_name")
+        self.inventory_prices = self.page.locator(".inventory_item_price")
+        self.backpack_add_button = self.page.locator("#add-to-cart-sauce-labs-backpack")
+        self.backpack_remove_button = self.page.locator("#remove-sauce-labs-backpack")
+        self.cart_badge = self.page.locator(".shopping_cart_badge")
+        self.inventory_images = self.page.locator(".inventory_item_img img")
+        self.sort_dropdown = self.page.locator(".product_sort_container")
+        self.product_images = self.page.locator(".inventory_item_img")
 
     def is_inventory_page_opened(self):
-        return self.page.locator("text=Products").is_visible()
+        return self.title.is_visible()
 
     def click_cart_button(self):
-        self.page.locator(".shopping_cart_link").click()
+        self.cart_button.click()
 
     def is_cart_page_opened(self):
-        return self.page.locator("text=Your Cart").is_visible()
-
-    def get_inventory_items(self):
-        return self.page.locator(".inventory_item")
+        return self.cart_title.is_visible()
 
     def get_inventory_items_count(self):
-        items = self.get_inventory_items()
-        return items.count()
+        return self.inventory_items.count()
 
     def get_inventory_name(self):
-        return self.page.locator(".inventory_item_name").all_text_contents()
+        return self.inventory_names.all_text_contents()
 
     def get_inventory_price(self):
-        return self.page.locator(".inventory_item_price").all_text_contents()
+        return self.inventory_prices.all_text_contents()
 
     def click_add_to_button(self):
-        self.page.locator("#add-to-cart-sauce-labs-backpack").click()
+        self.backpack_add_button.click()
 
     def is_button_remove_visible(self):
-        return self.page.locator("#remove-sauce-labs-backpack").is_visible()
+        return self.backpack_remove_button.is_visible()
 
     def is_cart_badge_visible(self):
-        return self.page.locator(".shopping_cart_badge").is_visible()
+        return self.cart_badge.is_visible()
 
     def get_inventory_images(self):
-        return self.page.locator(".inventory_item_img img")
+        return self.inventory_images
 
     def is_image_loaded(self, image):
         width = image.evaluate("el => el.naturalWidth")
         return width > 0
 
     def select_sort_low_to_high(self):
-        self.page.locator(".product_sort_container").select_option(value="lohi")
-
+        self.sort_dropdown.select_option(value="lohi")
 
     def select_sort_high_to_low(self):
-        self.page.locator(".product_sort_container").select_option(value="hilo")
+        self.sort_dropdown.select_option(value="hilo")
 
     def select_sort_a_to_z(self):
-        self.page.locator(".product_sort_container").select_option(value="az")
-
+        self.sort_dropdown.select_option(value="az")
 
     def click_first_product_image(self):
-        self.page.locator(".inventory_item_img").first.click()
+        self.product_images.first.click()
 
     def click_remove_button(self):
-        self.page.locator("#remove-sauce-labs-backpack").click()
+        self.backpack_remove_button.click()
 
     def get_cart_badge_text(self):
-       return self.page.locator(".shopping_cart_badge").text_content()
+        return self.cart_badge.text_content()
 
     def click_add_to_cart(self, product_name):
-        product_card = self.page.locator(".inventory_item").filter(has_text=product_name)
+        product_card = self.inventory_items.filter(has_text=product_name)
         product_card.locator("button").click()
-
 
     def click_remove_from_cart(self, product_name):
-        product_card = self.page.locator(".inventory_item").filter(has_text=product_name)
+        product_card = self.inventory_items.filter(has_text=product_name)
         product_card.locator("button").click()
-
-
-
-
-
-
-
-

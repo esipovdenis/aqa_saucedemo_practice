@@ -20,9 +20,7 @@ from config.users import (
 def test_login(page, user):
     """Успешный вход со стандартным пользователем / Успешный вход с другими валидными пользователями"""
     login_page = LoginPage(page)
-    login_page.enter_username(user)
-    login_page.enter_password(STANDARD_PASSWORD)
-    login_page.click_login()
+    login_page.login_procedure(user, STANDARD_PASSWORD)
     assert "/inventory.html" in page.url
     assert login_page.is_products_header_visible()
 
@@ -40,9 +38,7 @@ def test_login(page, user):
 def test_login_negative(page, username, password, expected_error):
     """Групповой тест всех негативных сценариев (неверные данные, пустые поля, блокировка)"""
     login_page = LoginPage(page)
-    login_page.enter_username(username)
-    login_page.enter_password(password)
-    login_page.click_login()
+    login_page.login_procedure(username, password)
     assert expected_error in login_page.get_error_message_text()
 
 

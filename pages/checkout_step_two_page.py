@@ -1,18 +1,17 @@
 class CheckoutStepTwoPage:
     def __init__(self, page):
         self.page = page
+        self.title = page.locator("text=Checkout: Overview")
+        self.items = page.locator(".cart_item")
+        self.finish_button = page.locator("#finish")
 
     def is_checkout_step_two_page_opened(self):
-        return self.page.locator("text=Checkout: Overview").is_visible()
-
-    def get_items(self):
-        return self.page.locator(".cart_item")
+        return self.title.is_visible()
 
     def get_items_count(self):
-        items = self.get_items()
-        return items.count()
+        return self.items.count()
 
     def click_finish_button(self):
-        self.page.locator("#finish").click()
+        self.finish_button.click()
 
 

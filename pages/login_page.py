@@ -1,19 +1,24 @@
-from config.users import STANDARD_USER, STANDARD_PASSWORD
+from pages.base_page import BasePage
 
-class LoginPage:
+class LoginPage(BasePage):
     def __init__(self, page):
-        self.page = page
+        super().__init__(page)
         """Локаторы полей и кнопок"""
-        self._username_field = page.locator("#user-name")
-        self._password_field = page.locator("#password")
-        self._login_button = page.locator("#login-button")
+        self._username_field = self.page.locator("#user-name")
+        self._password_field = self.page.locator("#password")
+        self._login_button = self.page.locator("#login-button")
 
         """Локаторы для проверок (из ассертов)"""
-        self._products_header = page.locator("text=Products")
-        self._error_msg_container = page.locator(
+        self._products_header = self.page.locator("text=Products")
+        self._error_msg_container = self.page.locator(
             ".error-message-container"
-        )  # Лучше использовать класс контейнера
-        self._error_text = page.locator("text=Epic sadface")
+        )
+        self._error_text = self.page.locator("text=Epic sadface")
+
+    def login_procedure(self, username, password):
+        self.enter_username(username)
+        self.enter_password(password)
+        self.click_login()
 
     def enter_username(self, username):
         self._username_field.fill(username)
@@ -34,17 +39,3 @@ class LoginPage:
 
     def is_error_visible(self):
         return self._error_text.is_visible()
-
-
-# class LoginPage:
-#     def __init__(self, page):
-#         self.page = page
-#
-#     def enter_username(self, username):
-#         self.page.locator("#user-name").fill(username)
-#
-#     def enter_password(self, password):
-#         self.page.locator("#password").fill(password)
-#
-#     def click_login(self):
-#         self.page.locator("#login-button").click()

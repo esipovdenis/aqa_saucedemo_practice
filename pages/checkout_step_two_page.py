@@ -1,6 +1,6 @@
 class CheckoutStepTwoPage:
     def __init__(self, page):
-        self.page = page
+        super().__init__(page)
         self.title = page.locator("text=Checkout: Overview")
         self.items = page.locator(".cart_item")
         self.finish_button = page.locator("#finish")

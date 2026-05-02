@@ -33,7 +33,8 @@ class InventoryPage(BasePage):
         return self.inventory_names.all_text_contents()
 
     def get_inventory_price(self):
-        return self.inventory_prices.all_text_contents()
+        prices = self.inventory_prices.all_text_contents()
+        return [float(p.replace("$", "")) for p in prices]
 
     def click_add_to_button(self):
         self.backpack_add_button.click()

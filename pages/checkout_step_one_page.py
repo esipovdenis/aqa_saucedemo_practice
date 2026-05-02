@@ -1,6 +1,6 @@
 class CheckoutStepOnePage:
     def __init__(self, page):
-        self.page = page
+        super().__init__(page)
         self.title = page.locator("text=Checkout: Your Information")
         self.first_name_input = page.locator("#first-name")
         self.last_name_input = page.locator("#last-name")

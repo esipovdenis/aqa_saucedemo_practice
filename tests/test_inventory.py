@@ -33,8 +33,7 @@ def test_tc_inv_005_sort_price_low_to_high(logged_in_inventory_page):
     """Сортировка по цене (низкая → высокая)"""
     logged_in_inventory_page.select_sort_low_to_high()
     prices = logged_in_inventory_page.get_inventory_price()
-    numeric_prices = [float(p.replace("$", "")) for p in prices]
-    assert numeric_prices == sorted(numeric_prices)
+    assert prices == sorted(prices), "Цены должны быть отсортированы по возрастанию"
 
 
 def test_tc_inv_006_sort_price_high_to_low(logged_in_inventory_page):

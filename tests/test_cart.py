@@ -35,13 +35,11 @@ def test_tc_cart_003_add_same_product_twice(logged_in_inventory_page):
 def test_tc_cart_004_remove_product_from_cart(logged_in_inventory_page):
     """Удаление товара из корзины"""
     logged_in_inventory_page.click_add_to_cart("Sauce Labs Bike Light")
-    assert (
-        logged_in_inventory_page.get_cart_badge_text() == "1"
-    ), "Бейдж корзины должен быть равен 1"
+    assert logged_in_inventory_page.get_cart_badge_text() == "1", \
+        "Бейдж корзины должен быть равен 1"
     logged_in_inventory_page.click_remove_from_cart("Sauce Labs Bike Light")
-    assert (
-        not logged_in_inventory_page.is_cart_badge_visible()
-    ), "Бейдж корзины не должен отображаться после удаления товара"
+    assert not logged_in_inventory_page.is_cart_badge_visible(), \
+        "Бейдж корзины не должен отображаться после удаления товара"
 
 
 @pytest.mark.skip(reason="No quantity controls (+/-) on SauceDemo")
@@ -58,7 +56,8 @@ def test_tc_cart_006_open_cart_page(logged_in_inventory_page):
     ), "Страница корзины не открылась"
 
 
-def test_tc_cart_007_continue_shopping_returns_to_inventory(logged_in_inventory_page):
+def test_tc_cart_007_continue_shopping_returns_to_inventory(
+        logged_in_inventory_page):
     """Возврат к покупкам из корзины"""
     logged_in_inventory_page.click_cart_button()
     assert (

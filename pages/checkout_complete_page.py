@@ -1,6 +1,6 @@
 class CheckoutCompletePage:
     def __init__(self, page):
-        self.page = page
+        super().__init__(page)
         self.title = page.locator("text=Checkout: Complete!")
         self.success_message = page.locator("text=Thank you for your order!")
 

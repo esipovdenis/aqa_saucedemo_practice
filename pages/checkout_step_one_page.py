@@ -1,11 +1,14 @@
-class CheckoutStepOnePage:
+from pages.base_page import BasePage
+class CheckoutStepOnePage(BasePage):
     def __init__(self, page):
         super().__init__(page)
-        self.title = page.locator("text=Checkout: Your Information")
-        self.first_name_input = page.locator("#first-name")
-        self.last_name_input = page.locator("#last-name")
-        self.postal_code_input = page.locator("#postal-code")
-        self.continue_button = page.locator("#continue")
+        self.title = self.page.locator("text=Checkout: Your Information")
+        self.first_name_input = self.page.locator("#first-name")
+        self.last_name_input = self.page.locator("#last-name")
+        self.postal_code_input = self.page.locator("#postal-code")
+        self.continue_button = self.page.locator("#continue")
+        self.first_name = self.page.locator('#first-name')
+
 
     def is_checkout_step_one_page_opened(self):
         return self.title.is_visible()
@@ -21,3 +24,9 @@ class CheckoutStepOnePage:
 
     def click_continue_button(self):
         self.continue_button.click()
+
+    def fill_checkout_form(self,first_name, last_name, postal_code):
+        self.enter_first_name(first_name)
+        self.enter_last_name(last_name)
+        self.enter_postal_code(postal_code)
+        self.click_continue_button()

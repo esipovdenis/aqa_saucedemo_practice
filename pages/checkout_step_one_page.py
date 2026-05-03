@@ -8,6 +8,7 @@ class CheckoutStepOnePage(BasePage):
         self.postal_code_input = self.page.locator("#postal-code")
         self.continue_button = self.page.locator("#continue")
         self.first_name = self.page.locator('#first-name')
+        self.error_message = self.page.locator("[data-test='error']")
 
 
     def is_checkout_step_one_page_opened(self):
@@ -30,3 +31,6 @@ class CheckoutStepOnePage(BasePage):
         self.enter_last_name(last_name)
         self.enter_postal_code(postal_code)
         self.click_continue_button()
+
+    def get_error_message_text(self):
+        return self.error_message.inner_text()

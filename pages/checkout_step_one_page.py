@@ -7,8 +7,10 @@ class CheckoutStepOnePage(BasePage):
         self.last_name_input = self.page.locator("#last-name")
         self.postal_code_input = self.page.locator("#postal-code")
         self.continue_button = self.page.locator("#continue")
-        self.first_name = self.page.locator('#first-name')
+        # self.first_name = self.page.locator('#first-name')
         self.error_message = self.page.locator("[data-test='error']")
+        self.cancel_button = self.page.locator('#cancel')
+        self.continue_shopping = self.page.locator("#continue-shopping")
 
 
     def is_checkout_step_one_page_opened(self):
@@ -34,3 +36,9 @@ class CheckoutStepOnePage(BasePage):
 
     def get_error_message_text(self):
         return self.error_message.inner_text()
+
+    def click_cancel_button(self):
+        self.cancel_button.click()
+
+    def click_continue_shopping(self):
+        self.continue_shopping.click()
